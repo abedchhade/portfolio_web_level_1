@@ -228,6 +228,10 @@ a{
         margin-right: 0px;
     }
     #languages div{
-     margin: 20px;
+    display: flex;
+    justify-content: center;
+    }
+    .border{
+     margin: 60px;
     }
 }
