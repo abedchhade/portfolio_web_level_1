@@ -39,10 +39,9 @@ skillsData.map(function(a) {
     lang.appendChild(div2);
     div2.appendChild(img2);
     div2.appendChild(name2);
-   
-   
-    console.log(div2);
 });
+
+
 // Projects Data
 const projectsData = [
    /* {
@@ -110,25 +109,39 @@ function (a){
 });
 const message = document.getElementById("message");
 const counter = document.getElementById("counter");
-function count(){
-    var len = message.value;
-     counter.innerText= len.length;
+
+function countWords() {
+    var lang= message.value;
+    counter.innerText= lang.trim().split(/\s+/).length;
 }
-message.addEventListener("input",count);
+message.addEventListener("input",countWords);
 
 document.getElementById('contact-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
-    // Collect form data after the form is submitted
+    const submitButton = document.querySelector('#contact-form button[type="submit"]');
+    submitButton.disabled = true; 
+
+    // Collect form data
     const params = {
         name: document.getElementById("name").value.trim(),
         email: document.getElementById('email').value.trim(),
-        message: document.getElementById('message').value
+        message: document.getElementById('message').value.trim(),
+        tel: document.getElementById("nb").value
     };
 
-    // Validate inputs
+   
     if (!params.name || !params.email || !params.message) {
         alert('Please fill in all fields before submitting.');
+        submitButton.disabled = false; //
+        return;
+    }
+
+   
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(params.email)) {
+        alert('Please enter a valid email address.');
+        submitButton.disabled = false; 
         return;
     }
 
@@ -136,36 +149,42 @@ document.getElementById('contact-form').addEventListener('submit', function (eve
     const template_id = 'template_p99k6fo';
     const user_id = 'IVYAGipEG_H9Lzz00';
 
-    // Send email using EmailJS
+   
+    submitButton.textContent = 'Sending...';
+
+   
     fetch('https://api.emailjs.com/api/v1.0/email/send', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            service_id: service_id,
-            template_id: template_id,
-            user_id: user_id,
+            service_id,
+            template_id,
+            user_id,
             template_params: params
         })
     })
-        .then(response => {
-            if (response.ok) {
-                console.log('SUCCESS!');
-                alert('Your message was sent successfully!');
-            } else {
-                return response.json().then(err => {
-                    console.log('FAILED...', err);
-                    alert('Failed to send your message. Please try again later.');
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Failed to send your message. Please try again later.');
-        });
+    .then(response => {
+        if (response.ok) {
+            alert('Your message was sent successfully!');
+            document.getElementById('contact-form').reset(); 
+        } else {
+            return response.json().then(err => {
+                console.error('FAILED...', err);
+                alert('Failed to send your message. Please try again later.');
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to send your message. Please try again later.');
+    })
+    .finally(() => {
+        submitButton.disabled = false; 
+        submitButton.textContent = 'Send Message';
+    });
 });
-
 
 
 

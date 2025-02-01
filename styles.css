@@ -12,6 +12,7 @@
     margin: 0px  ;
     padding: 0;
     box-sizing: border-box;
+    justify-content: center;
     
 }
 
@@ -20,12 +21,14 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
-    max-width: 1400px;
+
 }
+
+
 
 /* Sections */
 section {
-    padding: 5rem 5%;
+    padding: 3rem 5%;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -34,21 +37,36 @@ h1{
     text-align: center;
 }
   header{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-   
+    display: flex;
+    justify-content: space-between;
+    max-width: 1440px;
   }
-  .leftp
-  {
-   margin-left: 20px;
-    text-align: left;
-    margin-left: 80px;
+  #skills-tag{
+    display: flex;
+   flex-wrap: wrap;
+   justify-content: flex-start;
   }
+ 
+  #skills-tag span{
+    margin: 5px;
+    height: 30px;
+  }
+
+  .leftp{
+    padding-left: 70px;
+    padding-top: 10px;
+  }
+  
   #attheend{
     text-align: right;
     font-size: 12px;
     padding-right: 20px;
     margin-right: 120px;
+ 
+   }
+
+   #attheend span{
+    padding: 7px;
    }
 
    header img{
@@ -78,21 +96,25 @@ a{
 }
 .ram{
     position: relative;
-    top:8px;
+    top:2px;
     height: 15px;
     width: 15px;
     margin: 5px;
 }
 .border{
-    padding: 2px;
+    
     padding-right: 4px;
     color: var(--primary-color);
     border: var(--primary-color) solid;
     border-radius: 5px;
     padding-left: 0px;
+    
 }
 .border a{
     color: var(--primary-color);
+    padding: 4px;
+    position: relative;
+    bottom: 5px;
 }
 #skills{
     text-align: center;
@@ -112,8 +134,8 @@ a{
 
 }
 #languages{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 
@@ -155,7 +177,7 @@ a{
 }
 #contact-form{
     display: grid;
-    grid-template-columns:2fr 2fr;
+    grid-template-columns:1fr 1fr;
     gap:15px;
 }
 #picture{
@@ -168,10 +190,10 @@ a{
 .box{
     border: #4a76ee solid;
     height: 30px;
-    min-width: 300px;
+   min-width: 285px;
 }
 #submit{
-    width: 390px;
+    width: 300px;
     height: 30px;
     background-color: var(--primary-color);
     color: var(--background-color);
@@ -180,7 +202,10 @@ a{
     transform: translateY(-10px);
     animation: 1s ease;
 }
-
+.border:hover{
+    color: var(--text-color);
+    border-color: var(--text-color);
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -189,9 +214,9 @@ a{
         grid-template-columns:1fr;
       }
     #contact-form{
-        display: grid;
-        grid-template-columns:1fr;
-      
+       display: grid;
+       grid-template-columns:1fr;
+       justify-content: unset;
     }
   
     .hidden{
@@ -201,6 +226,7 @@ a{
       font-size: 10px;
       position: relative;
       top: 4px;
+      padding: 0px;
     }
    
     header img{
@@ -216,11 +242,7 @@ a{
     #Head{
         order: -1;
     }
-    #languages{
-        display: grid;
-        grid-template-columns: 1fr;
-        align-content: center;
-    }
+   
     .leftp{
         margin-left: 0px;
     }
@@ -233,5 +255,11 @@ a{
     }
     .border{
      margin: 60px;
+    }
+    .box{
+        width: 285px;
+    }
+    #submit{
+        width: 300px;
     }
 }
